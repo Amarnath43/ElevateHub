@@ -1,4 +1,5 @@
 require("dotenv").config(); 
+const config=require("./config")
 
 const app=require("./app")
 
@@ -9,8 +10,8 @@ app.get("/", (req, res) => {
     });
 });
 
-app.listen(process.env.PORT, ()=>
+app.listen(config.PORT, ()=>
 {
-    console.log("backend server ")
+    console.log(`backend server is running on ${config.PORT}`)
 })
 
