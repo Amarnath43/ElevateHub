@@ -21,7 +21,7 @@ const userSchema=new Schema({
     },
     
     password:{
-        type:Schema.Types.Number,
+        type:Schema.Types.String,
         required:true,
         trim:true,
         unique:true
