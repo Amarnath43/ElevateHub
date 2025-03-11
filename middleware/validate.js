@@ -17,7 +17,7 @@ module.exports=(schema, source=ValidationSource.BODY)=>{
         const {error}=schema.validate(req[source]);
         if(!error)
         {
-            next();
+            return next();
         }
         const {details}=error;
         const message=details.map((i)=>i.message.replace(/['"]+/g,"")).join(",");
