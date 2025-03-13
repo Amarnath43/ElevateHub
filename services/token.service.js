@@ -37,4 +37,4 @@ const verifyToken=async(token,secret)=>
     }
 }
 
-
+module.exports={generateAuthToken, generateVerificationToken, verifyToken}

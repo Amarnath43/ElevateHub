@@ -3,6 +3,7 @@ const router = express.Router();
 
 const authRoute=require('./auth.routes');
 const homeRoute=require('./home.routes');
+const mentorRoute=require('./mentor.routes')
 //const mentorRoute=require('./mentor.routes');
 
 const Routes=[
@@ -13,6 +14,10 @@ const Routes=[
     {
         path:'/auth',
         route: authRoute
+    },
+    {
+        path:'/mentor',
+        route: mentorRoute
     }
 ]
 
