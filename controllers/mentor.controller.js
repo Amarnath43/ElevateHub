@@ -19,3 +19,5 @@ const getMentorinfoByUsername=async(req,res,next)=>{
         mentor
     })
 }
+
+module.exports={getAllMentors, getMentorinfoByUsername}
