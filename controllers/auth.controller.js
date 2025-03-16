@@ -20,6 +20,13 @@ const signUp=async(req,res)=>{
 }
 
 const signIn=async(req,res)=>{
+    const {email, password}=req.body;
+    const user=await userService.loginUserWithEmailAndPassword(email,password);
+    const token=await tokenService.generateAuthToken(user);
+    user.password=undefined;
+
+    res.status(httpsStatus.ok).json({message: "Logged in successfully", user, token})
+
 
 }
 
