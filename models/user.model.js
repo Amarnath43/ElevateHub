@@ -35,6 +35,7 @@ const userSchema=new Schema({
 })
 
 userSchema.methods.isPasswordMatch=async(password)=>{
+    console.log(this.password);
      return await bcrypt.compare(password,this.password)
 }
 
