@@ -38,4 +38,4 @@ const restrictTo = (...roles) => {
       return next(new ApiError(httpStatus.unautherized, "You are not allowed")); // Reject the request if role is not allowed
     };
   };
-  
+  module.exports = { protect, restrictTo };
