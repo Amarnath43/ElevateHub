@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }); // Create the upload middleware
 
-router.post('/upload-photo', authMiddleware.protect, upload.single, asyncHandler(userController.uploadPhoto))
+router.post('/upload-photo', authMiddleware.protect, upload.single('photo'), asyncHandler(userController.uploadPhoto))
 
 router.get('/', authMiddleware.protect, asyncHandler(userController.getUser))
 
