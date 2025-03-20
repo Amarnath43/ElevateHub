@@ -8,6 +8,7 @@ const protect = async (req, res, next) => {
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         let token;
         token = req.headers.authorization.split(" ")[1];
+        console.log('Extracted Token:', token); 
         if (!token) {
             next(new ApiError("Unauthorized Access", httpStatus.unautherized))
         }
@@ -15,7 +16,7 @@ const protect = async (req, res, next) => {
             const decoded = await jwt.verifyToken(token, "accessToken");
             const currentuser = await userService.getUserById(decoded._id);
             console.log('Decoded Token:', decoded);
-            console.log('Current User:', currentUser);
+            console.log('Current User:', currentuser);
             if (!currentuser) {
                 return next(new ApiError(httpStatus.unautherized, "User not found"));
             }
