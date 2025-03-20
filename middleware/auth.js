@@ -14,28 +14,29 @@ const protect = async (req, res, next) => {
         try {
             const decoded = await jwt.verifyToken(token, "accessToken");
             const currentuser = await userService.getUserById(decoded._id);
-            if(!currentuser){
+            console.log('Decoded Token:', decoded);
+            console.log('Current User:', currentUser);
+            if (!currentuser) {
                 return next(new ApiError(httpStatus.unautherized, "User not found"));
             }
-            req.user=currentuser;
+            req.user = currentuser;
             next();
 
         }
-        catch(e)
-        {
+        catch (e) {
             next(new ApiError("Unauthorized Access", httpStatus.unautherized))
         }
-        
+
     }
 
 }
 const restrictTo = (...roles) => {
     return (req, res, next) => {
-      if (roles.includes(req.user.role)) {
-        return next(); // Allow the request to proceed if the role is allowed
-      }
-  
-      return next(new ApiError(httpStatus.unautherized, "You are not allowed")); // Reject the request if role is not allowed
+        if (roles.includes(req.user.role)) {
+            return next(); // Allow the request to proceed if the role is allowed
+        }
+
+        return next(new ApiError(httpStatus.unautherized, "You are not allowed")); // Reject the request if role is not allowed
     };
-  };
-  module.exports = { protect, restrictTo };
+};
+module.exports = { protect, restrictTo };

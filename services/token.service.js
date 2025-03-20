@@ -29,6 +29,7 @@ const verifyToken=async(token,secret)=>
 {
     if(secret==="accessToken")
     {
+        console.log('Token:', token);
         return await jwt.verify(token, config.jwt.accessSecret)
     }
     else if(secret==="verify")
