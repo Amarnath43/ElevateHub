@@ -2,7 +2,7 @@ const express=require('express');
 const userController=require('../../controllers/user.controller');
 const authMiddleware=require('../../middleware/auth')
 const asyncHandler=require('../../helper/asyncHandler')
-const router=express.Router;
+const router=express.Router();
 
 const multer = require('multer'); // Import multer
 
