@@ -4,6 +4,7 @@ cloudinary.config(config.cloudinary);
 const userService=require('../services/user.service');
 const httpStatus=require('../util/httpStatus')
 
+
 const uploadPhoto=async(req,res)=>{
 
     if(!req.file)

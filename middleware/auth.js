@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const ApiError = require('../helper/apiError');
 const httpStatus = require('../util/httpStatus');
-const userService = require('../services/user.service')
+const userService = require('../services/user.service');
+const tokenService=require('../services/token.service')
 
 
 const protect = async (req, res, next) => {
@@ -13,7 +14,7 @@ const protect = async (req, res, next) => {
             next(new ApiError("Unauthorized Access", httpStatus.unautherized))
         }
         try {
-            const decoded = await jwt.verifyToken(token, "accessToken");
+            const decoded = await tokenService.verifyToken(token, "accessToken");
             console.log('Decoded Token:', decoded);
             const currentuser = await userService.getUserById(decoded._id);
             
