@@ -1,4 +1,5 @@
 const cloudinary=require('cloudinary').v2;
+const config = require('../config');
 cloudinary.config(config.cloudinary);
 const userService=require('../services/user.service');
 const httpStatus=require('../util/httpStatus')
