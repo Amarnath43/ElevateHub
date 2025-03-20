@@ -14,8 +14,9 @@ const protect = async (req, res, next) => {
         }
         try {
             const decoded = await jwt.verifyToken(token, "accessToken");
-            const currentuser = await userService.getUserById(decoded._id);
             console.log('Decoded Token:', decoded);
+            const currentuser = await userService.getUserById(decoded._id);
+            
             console.log('Current User:', currentuser);
             if (!currentuser) {
                 return next(new ApiError(httpStatus.unautherized, "User not found"));
