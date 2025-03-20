@@ -28,7 +28,6 @@ const userSchema=new Schema({
         type:Schema.Types.String,
         required:true,
         trim:true,
-        unique:true
     },
     verified:{
         type:Schema.Types.Boolean,
@@ -42,7 +41,7 @@ const userSchema=new Schema({
     },
     profile:{
         tags:{
-            type:Schema.Types.String,
+            type: [String],
             default: [],
         },
         title:{
