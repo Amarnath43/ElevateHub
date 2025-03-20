@@ -1,3 +1,6 @@
+const UserModel=require('../models/user.model')
+
+
 const getUserById = async (id) => {
     return await UserModel.findById(id);
   };
