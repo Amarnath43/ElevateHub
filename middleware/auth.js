@@ -7,15 +7,15 @@ const userService = require('../services/user.service')
 const protect = async (req, res, next) => {
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         let token;
-        token = req.headers.authorization.split(" ")[0];
+        token = req.headers.authorization.split(" ")[1];
         if (!token) {
             next(new ApiError("Unauthorized Access", httpStatus.unautherized))
         }
         try {
             const decoded = await jwt.verifyToken(token, "accessToken");
-            const currentuser = userService.getUserById(decoded._id);
+            const currentuser = await userService.getUserById(decoded._id);
             if(!currentuser){
-                return new ApiError(httpStatus.unautherized, "User not found");
+                return next(new ApiError(httpStatus.unautherized, "User not found"));
             }
             req.user=currentuser;
             next();
