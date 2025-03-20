@@ -2,6 +2,10 @@ const bcrypt=require('bcrypt');
 const {Schema, model}=require('mongoose');
 
 const userSchema=new Schema({
+    photoUrl:{
+        type:Schema.Types.String,
+        default:""
+    },
     name:{
         type: Schema.Types.String,
         required:true,
@@ -26,11 +30,55 @@ const userSchema=new Schema({
         trim:true,
         unique:true
     },
+    verified:{
+        type:Schema.Types.Boolean,
+        default:false,
+    },
     role:{
         type: Schema.Types.String,
         enum:["student","mentor"],
         default:null
         
+    },
+    profile:{
+        tags:{
+            type:Schema.Types.String,
+            default: [],
+        },
+        title:{
+            type:Schema.Types.String,
+            default:""
+        },
+        bio:{
+            type:Schema.Types.String,
+            default:""
+        },
+        college:{
+            type:Schema.Types.String,
+            default:""
+        },
+        social:{
+            linkedin: {
+                type:Schema.Types.String,
+            default:""
+            },
+            github: {
+                type:Schema.Types.String,
+            default:""
+            },
+            twitter: {
+                type:Schema.Types.String,
+            default:""
+            },
+            facebook: {
+                type:Schema.Types.String,
+            default:""
+            },
+            instagram: {
+                type:Schema.Types.String,
+            default:""
+            }
+        }
     }
 })
 
