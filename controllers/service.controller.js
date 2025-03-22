@@ -66,3 +66,5 @@ const getServiceById=async(req,res,next)=>{
         console.log(e);
     }
 }
+
+module.exports={createService,updateService,getServiceByMentor,getServiceById};
