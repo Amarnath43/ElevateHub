@@ -10,7 +10,7 @@ const router=express.Router();
 
 router.post('/',validate(createServiceSchema), authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.createService));
 
-router.post('/:serviceId',validate(createServiceSchema), authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.updateService))
+router.put('/:serviceId',validate(createServiceSchema), authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.updateService))
 
 router.get('/', authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.getServiceByMentor))
 

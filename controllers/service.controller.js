@@ -12,6 +12,7 @@ const createService=async(req,res,next)=>{
             duration,
             price
         })
+        console.log(service);
         res.status(httpStatus.created).json({success:true, message:"service created", service})
     }
     catch (error) {
