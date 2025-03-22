@@ -28,7 +28,7 @@ const updateService=async(req,res,next)=>{
 
         const mentorId=req.user._id;
         const {name,description, duration, price}=req.body;
-        const service=await service.updateService(serviceId, mentorId, {
+        const service=await serviceService.updateService(serviceId, mentorId, {
             name,
             description,
             duration,
@@ -53,7 +53,7 @@ const updateService=async(req,res,next)=>{
 const getServiceByMentor=async(req,res,next)=>{
     try{
         const mentorId=req.user._id;
-        const services=await service.getServiceByMentor(mentorId);
+        const services=await serviceService.getServiceByMentor(mentorId);
 
          if (!services || services.length === 0) {
               return res.status(httpStatus.notFound).json({
@@ -71,7 +71,7 @@ const getServiceByMentor=async(req,res,next)=>{
 const getServiceById=async(req,res,next)=>{
     try{
         const serviceId = req.params.serviceId;
-        const service=await service.getServiceById(serviceId);
+        const service=await serviceService.getServiceById(serviceId);
         res.status(httpStatus.ok).json({success:true, service})
     }
     catch (error) {
