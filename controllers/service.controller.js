@@ -1,4 +1,4 @@
-const service=require('../services/service.service');
+const serviceService = require("../services/service.service");
 const httpStatus = require('../util/httpStatus');
 const ApiError = require("../helper/apiError");
 const createService=async(req,res,next)=>{
@@ -6,7 +6,7 @@ const createService=async(req,res,next)=>{
 
         const mentorId=req.user._id;
         const {name,description, duration, price}=req.body;
-        const service=await service.createService({
+        const service=await serviceService.createService({
             name,
             description,
             duration,
