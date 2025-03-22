@@ -1,5 +1,6 @@
 const service=require('../services/service.service');
 const httpStatus = require('../util/httpStatus');
+const ApiError = require("../helper/apiError");
 const createService=async(req,res,next)=>{
     try{
 
@@ -13,10 +14,9 @@ const createService=async(req,res,next)=>{
         })
         res.status(httpStatus.created).json({success:true, message:"service created", service})
     }
-    catch(e)
-    {
-        console.log(e)
-    }
+    catch (error) {
+        next(error);  // Pass the error to the global error handler
+      }
    
 
 }
@@ -33,12 +33,18 @@ const updateService=async(req,res,next)=>{
             duration,
             price
         })
+
+         if (!service) {
+              throw new ApiError(
+                httpStatus.notFound,
+                "Service not found"
+              );
+            }
         res.status(httpStatus.ok).json({success:true, service})
     }
-    catch(e)
-    {
-        console.log(e)
-    }
+    catch (error) {
+        next(error);  // Pass the error to the global error handler
+      }
    
 
 }
@@ -47,12 +53,18 @@ const getServiceByMentor=async(req,res,next)=>{
     try{
         const mentorId=req.user._id;
         const services=await service.getServiceByMentor(mentorId);
+
+         if (!services || services.length === 0) {
+              return res.status(httpStatus.notFound).json({
+                success: false,
+                message: "No services found for this mentor",
+              });
+            }
         res.status(httpStatus.ok).json({success:true, services})
     }
-    catch(e)
-    {
-        console.log(e);
-    }
+    catch (error) {
+        next(error);  // Pass the error to the global error handler
+      }
 }
 
 const getServiceById=async(req,res,next)=>{
@@ -61,10 +73,9 @@ const getServiceById=async(req,res,next)=>{
         const service=await service.getServiceById(serviceId);
         res.status(httpStatus.ok).json({success:true, service})
     }
-    catch(e)
-    {
-        console.log(e);
-    }
+    catch (error) {
+        next(error);  // Pass the error to the global error handler
+      }
 }
 
 module.exports={createService,updateService,getServiceByMentor,getServiceById};
