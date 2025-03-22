@@ -36,6 +36,7 @@ const protect = async (req, res, next) => {
 const restrictTo = (...roles) => {
     return (req, res, next) => {
         if (roles.includes(req.user.role)) {
+            console.log("hello")
             return next(); // Allow the request to proceed if the role is allowed
         }
 
