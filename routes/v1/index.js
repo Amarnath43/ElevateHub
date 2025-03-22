@@ -5,6 +5,7 @@ const authRoute=require('./auth.routes');
 const homeRoute=require('./home.routes');
 const mentorRoute=require('./mentor.routes');
 const userRoute=require('./user.routes');
+const serviceRoute=require('./service.route')
 
 const Routes=[
     {
@@ -22,7 +23,12 @@ const Routes=[
     {
         path:'/user',
         route: userRoute
-    }
+    },
+    {
+        path:'/service',
+        route: serviceRoute
+    },
+
 ]
 
 Routes.forEach((route)=>{

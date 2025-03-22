@@ -34,6 +34,7 @@ const updateUserProfile=async(req,res,next)=>{
     {
         return next(new ApiError("User not found", httpStatus.notFound))
     }
+    updatedUser.password=undefined;
    res.status(httpStatus.ok).json({message: "profile updated successfully", user:updatedUser })
 
 }
