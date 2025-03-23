@@ -13,6 +13,7 @@ const createService=async(req,res,next)=>{
             price
         })
         console.log(service);
+        toast.success("service created")
         res.status(httpStatus.created).json({success:true, message:"service created", service})
     }
     catch (error) {
