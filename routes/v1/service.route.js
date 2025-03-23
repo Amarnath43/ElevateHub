@@ -23,5 +23,5 @@ router.get("/:serviceId", authMiddleware.protect,
                                 asyncHandler(serviceController.getServiceById));
 
 
-module.export=router;
+module.exports=router;
     
