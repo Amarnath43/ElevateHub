@@ -7,19 +7,19 @@ const {createServiceSchema}=require('../../validations/service.validation')
 
 const router = express.Router();
 router.post("/", validate(createServiceSchema), authMiddleware.protect, 
-                            authMiddleware.restricTo("mentor"),
+                            authMiddleware.restrictTo("mentor"),
                             asyncHandler(serviceController.createService))
 
 router.post("/:serviceId", validate(createServiceSchema), authMiddleware.protect, 
-                            authMiddleware.restricTo("mentor"),
+                            authMiddleware.restrictTo("mentor"),
                             asyncHandler(serviceController.updateService))
 
 router.get("/", authMiddleware.protect, 
-                            authMiddleware.restricTo("mentor"),
+                            authMiddleware.restrictTo("mentor"),
                             asyncHandler(serviceController.getServiceByMentor))
 
 router.get("/:serviceId", authMiddleware.protect, 
-                                authMiddleware.restricTo("mentor"),
+                                authMiddleware.restrictTo("mentor"),
                                 asyncHandler(serviceController.getServiceById));
 
 
