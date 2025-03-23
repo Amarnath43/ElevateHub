@@ -1,14 +1,11 @@
 const Joi = require('joi');
 
-const createServiceSchema = Joi.object().keys({
+const createServiceSchema = Joi.object({
     serviceName: Joi.string().optional(),
     description: Joi.string().optional(),
-    duration: Joi.string().optional(),
-    price: Joi.string().optional(),
-    active: Joi.string().optional(),
+    duration: Joi.number().optional(),  
+    price: Joi.number().optional(),     
+    active: Joi.boolean().optional(),   
 });
 
-
-
-module.exports={createServiceSchema}
-
+module.exports = { createServiceSchema };
