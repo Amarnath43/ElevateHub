@@ -3,6 +3,8 @@ const serviceController = require("../../controllers/service.controller");
 const asyncHandler = require("../../helper/asyncHandler");
 const validate = require("../../middleware/validate");
 const authMiddleware = require("../../middleware/auth")
+const {createServiceSchema}=require('../../validations/service.validation')
+
 const router = express.Router();
 router.post("/", validate(createServiceSchema), authMiddleware.protect, 
                             authMiddleware.restricTo("mentor"),
