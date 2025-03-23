@@ -28,10 +28,11 @@ const updateService=async(req,res,next)=>{
     try{
         const serviceId = req.params.serviceId;
 
-        const mentorId=req.user._id;
-        const {name,description, duration, price}=req.body;
-        const service=await serviceService.updateService(serviceId, mentorId, {
-            name,
+        const mentor=req.user &&req.user._id;
+        const {serviceName,description, duration, price}=req.body;
+        const service=await serviceService.updateService(serviceId, mentor, {
+            mentor,
+            serviceName,
             description,
             duration,
             price
