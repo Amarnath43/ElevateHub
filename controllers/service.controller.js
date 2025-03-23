@@ -3,8 +3,8 @@ const httpStatus = require('../util/httpStatus');
 const ApiError = require("../helper/apiError");
 const createService=async(req,res,next)=>{
     try{
-        const mentor = req.user
-        const mentorId=req.user._id;
+    
+        const mentor=req.user &&req.user._id;
         const { serviceName, description, duration, price } = req.body;
         const service=await serviceService.createService({
             mentor,
