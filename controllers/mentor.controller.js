@@ -1,7 +1,7 @@
 const ApiError = require('../helper/apiError');
 const mentorService=require('../services/mentor.service');
 const httpStatus = require('../util/httpStatus');
-const { username } = req.params;
+
 
 const getAllMentors=async(req,res,next)=>{
     const mentors= await mentorService.getAllMentors();
@@ -11,6 +11,7 @@ const getAllMentors=async(req,res,next)=>{
 };
 
 const getMentorinfoByUsername=async(req,res,next)=>{
+    const { username } = req.params;
     const mentor= await mentorService.getMentorByUsername(username);
     if(!mentor)
     {
