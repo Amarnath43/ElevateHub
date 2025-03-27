@@ -31,7 +31,6 @@ router.get('/',
 // 🔥 FIXED: moved mentor route under /mentor/:mentorId
 router.get('/mentor/:mentorId',
   authMiddleware.protect,
-  authMiddleware.restrictTo("mentor"),
   asyncHandler(serviceController.getServicesOfMentor)
 );
 
