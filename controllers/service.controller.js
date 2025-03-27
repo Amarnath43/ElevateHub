@@ -93,16 +93,29 @@ const getServicesOfMentor = async (req, res, next) => {
     }
 }
 
-const getServiceById = async (req, res, next) => {
+const getServiceById = async (req, res) => {
     try {
-        const serviceId = req.params.serviceId;
-        const service = await serviceService.getServiceById(serviceId);
-        service.slots = getNext7Days(); // helper function
-        res.status(httpStatus.ok).json({ success: true, service })
+      const service = await ServiceModel.findById(req.params.serviceId);
+  
+      if (!service) {
+        return res.status(404).json({ success: false, message: 'Service not found' });
+      }
+  
+      // Convert Mongoose doc to plain object and inject dynamic slots
+      const updatedService = {
+        ...service._doc,
+        slots: getNext7Days(),
+      };
+  
+      console.log('✅ Service being returned:', updatedService); // Debug log
+  
+      res.status(200).json({ success: true, service: updatedService });
+  
+    } catch (error) {
+      console.error('❌ Error fetching service:', error);
+      res.status(500).json({ success: false, message: 'Internal server error' });
     }
-    catch (error) {
-        next(error);  // Pass the error to the global error handler
-    }
-}
+  };
+  
 
 module.exports = { createService, updateService, getServiceByMentor, getServiceById, getServicesOfMentor };
