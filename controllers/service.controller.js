@@ -77,6 +77,7 @@ const getServicesOfMentor=async(req,res,next)=>{
         const mentorId = req.params.mentorId;  
         console.log(mentorId);
         const services=await serviceService.getServicesOfMentor(mentorId);
+        console.log("Services retrieved:", services);
 
          if (!services || services.length === 0) {
               return res.status(httpStatus.notFound).json({
