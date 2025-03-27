@@ -1,7 +1,7 @@
 const serviceService = require("../services/service.service");
 const httpStatus = require('../util/httpStatus');
 const ApiError = require("../helper/apiError");
-const { getNext7Days } = require('../utils/dateUtils');
+const { getNext7Days } = require('../util/dateUtils');
 const createService = async (req, res, next) => {
     try {
 
