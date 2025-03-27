@@ -21,6 +21,11 @@ const getServiceByMentor=async(mentorId)=>{
     return await ServiceModel.find({mentor:mentorId})
 }
 
+const getServicesOfMentor=async(mentorId)=>{
+    return await ServiceModel.find({mentor:mentorId})
+}
+
+
 const getServiceById=async(serviceId)=>{
 return await ServiceModel.findById(serviceId)
 };

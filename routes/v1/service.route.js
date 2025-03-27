@@ -14,6 +14,8 @@ router.put('/:serviceId',validate(createServiceSchema), authMiddleware.protect, 
 
 router.get('/', authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.getServiceByMentor))
 
+router.get('/:mentorId', authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.getServicesOfMentor))
+
 router.get('/:serviceId', authMiddleware.protect, authMiddleware.restrictTo("mentor"), asyncHandler(serviceController.getServiceById))
 
 

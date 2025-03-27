@@ -71,6 +71,25 @@ const getServiceByMentor=async(req,res,next)=>{
       }
 }
 
+
+const getServicesOfMentor=async(req,res,next)=>{
+    try{
+        const mentorId=req.params._id;
+        const services=await serviceService.getServiceByMentor(mentorId);
+
+         if (!services || services.length === 0) {
+              return res.status(httpStatus.notFound).json({
+                success: false,
+                message: "No services found for this mentor",
+              });
+            }
+        res.status(httpStatus.ok).json({success:true, services})
+    }
+    catch (error) {
+        next(error);  // Pass the error to the global error handler
+      }
+}
+
 const getServiceById=async(req,res,next)=>{
     try{
         const serviceId = req.params.serviceId;
@@ -82,4 +101,4 @@ const getServiceById=async(req,res,next)=>{
       }
 }
 
-module.exports={createService,updateService,getServiceByMentor,getServiceById};
+module.exports={createService,updateService,getServiceByMentor,getServiceById, getServicesOfMentor};
