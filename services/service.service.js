@@ -34,5 +34,6 @@ module.exports={
     createService,
     updateService,
     getServiceByMentor,
-    getServiceById
+    getServiceById,
+    getServicesOfMentor
 }
