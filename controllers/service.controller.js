@@ -80,7 +80,7 @@ const getServicesOfMentor=async(req,res,next)=>{
         console.log("Services retrieved:", services);
 
          if (!services || services.length === 0) {
-              return res.status(httpStatus.notFound).json({
+              return res.status(httpStatus.ok).json({
                 success: false,
                 message: "No services found for this mentor",
               });
