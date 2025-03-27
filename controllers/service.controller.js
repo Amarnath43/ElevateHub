@@ -1,12 +1,13 @@
 const serviceService = require("../services/service.service");
 const httpStatus = require('../util/httpStatus');
 const ApiError = require("../helper/apiError");
-const createService=async(req,res,next)=>{
-    try{
-    
-        const mentor=req.user &&req.user._id;
+const { getNext7Days } = require('../utils/dateUtils');
+const createService = async (req, res, next) => {
+    try {
+
+        const mentor = req.user && req.user._id;
         const { serviceName, description, duration, price } = req.body;
-        const service=await serviceService.createService({
+        const service = await serviceService.createService({
             mentor,
             serviceName,
             description,
@@ -15,22 +16,22 @@ const createService=async(req,res,next)=>{
         })
         console.log(service);
         toast.success("service created")
-        res.status(httpStatus.created).json({success:true, message:"service created", service})
+        res.status(httpStatus.created).json({ success: true, message: "service created", service })
     }
     catch (error) {
         next(error);  // Pass the error to the global error handler
-      }
-   
+    }
+
 
 }
 
-const updateService=async(req,res,next)=>{
-    try{
+const updateService = async (req, res, next) => {
+    try {
         const serviceId = req.params.serviceId;
 
-        const mentor=req.user &&req.user._id;
-        const {serviceName,description, duration, price}=req.body;
-        const service=await serviceService.updateService(serviceId, mentor, {
+        const mentor = req.user && req.user._id;
+        const { serviceName, description, duration, price } = req.body;
+        const service = await serviceService.updateService(serviceId, mentor, {
             mentor,
             serviceName,
             description,
@@ -38,69 +39,70 @@ const updateService=async(req,res,next)=>{
             price
         })
 
-         if (!service) {
-              throw new ApiError(
+        if (!service) {
+            throw new ApiError(
                 httpStatus.notFound,
                 "Service not found"
-              );
-            }
-        res.status(httpStatus.ok).json({success:true, service})
+            );
+        }
+        res.status(httpStatus.ok).json({ success: true, service })
     }
     catch (error) {
         next(error);  // Pass the error to the global error handler
-      }
-   
+    }
+
 
 }
 
-const getServiceByMentor=async(req,res,next)=>{
-    try{
-        const mentorId=req.user._id;
-        const services=await serviceService.getServiceByMentor(mentorId);
+const getServiceByMentor = async (req, res, next) => {
+    try {
+        const mentorId = req.user._id;
+        const services = await serviceService.getServiceByMentor(mentorId);
 
-         if (!services || services.length === 0) {
-              return res.status(httpStatus.notFound).json({
+        if (!services || services.length === 0) {
+            return res.status(httpStatus.notFound).json({
                 success: false,
                 message: "No services found for this mentor",
-              });
-            }
-        res.status(httpStatus.ok).json({success:true, services})
+            });
+        }
+        res.status(httpStatus.ok).json({ success: true, services })
     }
     catch (error) {
         next(error);  // Pass the error to the global error handler
-      }
+    }
 }
 
 
-const getServicesOfMentor=async(req,res,next)=>{
-    try{
-        const mentorId = req.params.mentorId;  
+const getServicesOfMentor = async (req, res, next) => {
+    try {
+        const mentorId = req.params.mentorId;
         console.log(mentorId);
-        const services=await serviceService.getServicesOfMentor(mentorId);
+        const services = await serviceService.getServicesOfMentor(mentorId);
         console.log("Services retrieved:", services);
 
-         if (!services || services.length === 0) {
-              return res.status(httpStatus.ok).json({
+        if (!services || services.length === 0) {
+            return res.status(httpStatus.ok).json({
                 success: false,
                 message: "No services found for this mentor",
-              });
-            }
-        res.status(httpStatus.ok).json({success:true, services})
+            });
+        }
+        res.status(httpStatus.ok).json({ success: true, services })
     }
     catch (error) {
         next(error);  // Pass the error to the global error handler
-      }
+    }
 }
 
-const getServiceById=async(req,res,next)=>{
-    try{
+const getServiceById = async (req, res, next) => {
+    try {
         const serviceId = req.params.serviceId;
-        const service=await serviceService.getServiceById(serviceId);
-        res.status(httpStatus.ok).json({success:true, service})
+        const service = await serviceService.getServiceById(serviceId);
+        service.slots = getNext7Days(); // helper function
+        res.status(httpStatus.ok).json({ success: true, service })
     }
     catch (error) {
         next(error);  // Pass the error to the global error handler
-      }
+    }
 }
 
-module.exports={createService,updateService,getServiceByMentor,getServiceById, getServicesOfMentor};
+module.exports = { createService, updateService, getServiceByMentor, getServiceById, getServicesOfMentor };
