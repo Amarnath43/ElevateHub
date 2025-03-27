@@ -74,7 +74,7 @@ const getServiceByMentor=async(req,res,next)=>{
 
 const getServicesOfMentor=async(req,res,next)=>{
     try{
-        const mentorId=req.params._id;
+        const mentorId = req.params.mentorId;  
         const services=await serviceService.getServiceByMentor(mentorId);
 
          if (!services || services.length === 0) {
