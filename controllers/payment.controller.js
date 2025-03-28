@@ -16,9 +16,9 @@ const createOrder = async (req, res) => {
       return res.status(400).send({ success: false, msg: "Missing required fields" });
     }
 
-    const amountInPaise = amount * 100; // Convert to paise
+    // Convert to paise
     const options = {
-      amount: amountInPaise,
+      amount: amountInRupees,
       currency: "INR",
       receipt: `receipt_${new Date().getTime()}`,  // Unique receipt
       notes: {
