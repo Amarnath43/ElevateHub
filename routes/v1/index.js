@@ -6,6 +6,7 @@ const homeRoute=require('./home.routes');
 const mentorRoute=require('./mentor.routes');
 const userRoute=require('./user.routes');
 const serviceRoute=require('./service.route')
+const paymentRoute=require('./payment.route')
 
 const Routes=[
     {
@@ -27,6 +28,11 @@ const Routes=[
     {
         path:'/service',
         route: serviceRoute
+    },
+    ,
+    {
+        path:'/payment',
+        route: paymentRoute
     },
 
 ]
