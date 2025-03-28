@@ -8,8 +8,9 @@ const razorpayInstance = new Razorpay({
 });
 const createOrder = async (req, res) => {
   try {
-    const { amount, currency, name, description } = req.body;
     console.log("Incoming Request Body:", req.body);
+    const { amount, currency, name, description } = req.body;
+    
 
     if (!amount || !currency || !name || !description) {
       return res.status(400).send({ success: false, msg: "Missing required fields" });
